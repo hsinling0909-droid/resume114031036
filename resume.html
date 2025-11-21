@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>個人履歷表 - 亞洲大學經管系</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 85%;
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .section {
+      margin-top: 35px;
+    }
+    .section-title {
+      font-size: 20px;
+      border-left: 5px solid #4a90e2;
+      padding-left: 10px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .info-list {
+      line-height: 1.8;
+    }
+    .skills span {
+      display: inline-block;
+      margin: 5px;
+      padding: 6px 12px;
+      background: #e8f1ff;
+      border-radius: 8px;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+    }
+    /* JS Interactive Button */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #4a90e2;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #3b7dc7;
+    }
+    #msg {
+      margin-top: 10px;
+      color: #4a90e2;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>個人履歷表</h1>
+    <h3 style="text-align:center; color:#666;">亞洲大學 經營管理學系</h3>
+
+    <!-- 基本資料 -->
+    <div class="section">
+      <div class="section-title">基本資料</div>
+      <div class="info-list">
+        <strong>姓名：</strong> 康芯綾<br />
+        <strong>電話：</strong> 09xx-xxx-xxx<br />
+        <strong>Email：</strong> example@mail.com<br />
+        <strong>所在地：</strong> 台灣
+      </div>
+    </div>
+
+    <!-- 學歷 -->
+    <div class="section">
+      <div class="section-title">學歷</div>
+      <div class="info-list">
+        <strong>亞洲大學 經營管理學系</strong><br />
+        2025 - 在學中
+      </div>
+    </div>
+
+    <!-- 技能 -->
+    <div class="section">
+      <div class="section-title">技能</div>
+      <div class="skills">
+        <span>商業分析</span>
+        <span>資料整理</span>
+        <span>Excel / PowerPoint</span>
+        <span>團隊合作</span>
+        <span>簡報能力</span>
+      </div>
+    </div>
+
+    <!-- 經驗 -->
+    <div class="section">
+      <div class="section-title">經驗 / 活動</div>
+      <div class="info-list">
+        <strong>系學會活動企劃與執行</strong><br />
+        參與迎新活動、學術講座及系內比賽規劃，負責流程安排與人力協調，培養企劃能力與跨部門溝通技巧。
+        <br /><br />
+        <strong>校內專題研究（市場調查與資料分析）</strong><br />
+        蒐集消費者行為資料、進行問卷設計與統計分析，完成研究簡報並於課堂發表。
+        <br /><br />
+        <strong>志工服務經驗</strong><br />
+        協助校內活動服務台、公益活動場地布置，累積服務時數並提升團隊協作能力。
+        <br /><br />
+        <strong>產業參訪</strong><br />
+        參與企業參訪（例：製造業、電商、連鎖零售等），了解實際營運流程與企業管理方式。
+        <br /><br />
+        <strong>課堂專案實作</strong><br />
+        與組員共同完成行銷企劃書、財務分析報告及商業模式設計，提升邏輯思考與簡報表達能力。
+      </div>
+    </div>
+
+    <!-- 未來目標 -->
+    <div class="section">
+      <div class="section-title">未來目標</div>
+      <div class="info-list">
+        希望在大學期間累積更多商業實務經驗，並進一步提升資料分析與企劃能力。
+        未來期望能朝向企業管理、行銷企劃或專案管理等領域發展，將所學應用於實際職場中，成為能夠獨立解決問題、具備整合能力的管理人才。
+      </div>
+    </div>
+
+    <!-- PDF 下載按鈕 -->
+    <div class="section">
+      <div class="section-title">下載履歷</div>
+      <button class="btn" onclick="exportPDF()">直接下載 PDF</button>
+    </div>
+
+    <!-- JS PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+      async function exportPDF() {
+        const element = document.querySelector('.container');
+
+        // 使用 html2canvas 擷取畫面
+        const canvas = await html2canvas(element, { scale: 2 });
+        const imgData = canvas.toDataURL('image/png');
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'pt', 'a4');
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+
+        // 將整個履歷縮放成一頁
+        const imgWidth = pdfWidth;
+        const imgHeight = canvas.height * (pdfWidth / canvas.width);
+
+        const scaleFactor = pdfHeight / imgHeight; // 使內容全部塞進一頁
+
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight * scaleFactor);
+
+        pdf.save('康芯綾_個人履歷.pdf');('康芯綾_個人履歷.pdf');
+      }
+    </script>
+
+    <!-- JavaScript 按鈕互動 -->
+    <div class="section">
+      <div class="section-title">互動功能</div>
+      <button class="btn" onclick="showMessage()">點我查看問候訊息</button>
+      <div id="msg"></div>
+    </div>
+
+    <footer>© 2025 個人履歷表範本</footer>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById("msg").textContent = "祝你今天順利又充實！";
+    }
+  </script>
+</body>
+</html>
