@@ -190,4 +190,39 @@
   </script>
 </body>
 </html>
-<img src="images/01.jpg" alt="您的照片">
+<head>
+<img src="images/01.jpg" alt="您的照片"class="profile-photo">
+<img id="profile-photo" src="images/01.jpg" alt="Profile Picture">
+/*
+======================================
+照片定位與大小調整
+======================================
+
+#profile-photo {
+    /* 1. 脫離文檔流，實現精確定位 */
+    position: absolute; 
+    
+    /* 2. 將照片釘在右側邊緣，距離右邊 30px */
+    right: 30px; 
+    
+    /* 3. 將照片釘在上側邊緣，距離頂部 30px */
+    top: 30px; 
+    
+    /* 4. 設定照片大小 */
+    width: 150px; /* 設置照片寬度為 150 像素 */
+    height: 150px; /* 設置照片高度為 150 像素 */
+    
+    /* 5. (選用) 讓照片呈現圓形 */
+    border-radius: 50%; 
+    
+    /* 6. (選用) 如果圖片不是正方形，保持比例並填滿空間 */
+    object-fit: cover; 
+    
+    /* 7. (選用) 增加輕微陰影，讓照片更有立體感 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    /* 8. 確保圖片位於其他內容的上方 */
+    z-index: 1000;
+}
+<style>
+  
